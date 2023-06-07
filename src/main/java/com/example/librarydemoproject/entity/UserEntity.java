@@ -1,4 +1,4 @@
-package entity;
+package com.example.librarydemoproject.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +12,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class User extends BasicEntity{
+public class UserEntity extends BasicEntity{
     @Column(nullable = false)
     private String username;
     @Column(nullable = false)
