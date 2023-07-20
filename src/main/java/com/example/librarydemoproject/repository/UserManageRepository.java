@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserManageRepository extends CrudRepository<UserEntity,Integer> {
+public interface UserManageRepository extends CrudRepository<UserEntity, Integer> {
     UserEntity findByUsername(String username);
 }

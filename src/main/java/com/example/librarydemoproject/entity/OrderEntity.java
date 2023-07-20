@@ -1,11 +1,14 @@
 package com.example.librarydemoproject.entity;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
 @Entity
@@ -23,5 +26,5 @@ public class OrderEntity extends BasicEntity {
     @Column
     private Boolean isReturned;
     @Column
-    private Date orderDate= new Date();
+    private Date orderDate = new Date();
 }

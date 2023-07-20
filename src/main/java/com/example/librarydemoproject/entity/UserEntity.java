@@ -1,18 +1,19 @@
 package com.example.librarydemoproject.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @ToString
-public class UserEntity extends BasicEntity{
+public class UserEntity extends BasicEntity {
     @Column(nullable = false)
     private String username;
     @Column(nullable = false)
