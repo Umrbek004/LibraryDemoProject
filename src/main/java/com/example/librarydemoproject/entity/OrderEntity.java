@@ -4,11 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.lang.Nullable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -18,8 +16,10 @@ import java.util.Date;
 @ToString
 public class OrderEntity extends BasicEntity {
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id",nullable = false)
     private UserEntity user;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_id",nullable = false)
     private BookEntity book;
     @Column
     private Boolean isApproved;

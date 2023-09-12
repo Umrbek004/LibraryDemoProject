@@ -15,6 +15,16 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class AppUser implements UserDetails {
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     private String username;
     private String password;
     private String role;
