@@ -1,0 +1,18 @@
+package com.example.librarydemoproject.dto.orderDTOs;
+
+import com.example.librarydemoproject.entity.BookEntity;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Date;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class BookAndOrderPropertiesDTO {
+    private BookEntity book;
+    private Boolean isApproved;
+    private Boolean isReturned;
+    private Date orderDate;
+}

@@ -1,0 +1,44 @@
+create function is_approve_function()
+RETURNS  trigger
+LANGUAGE plpgsql
+as $$
+    BEGIN
+        if new.is_approved <>old.is_approved and new.is_approved=true then
+            update book_entity set quantity=(quantity-1) where id=old.book_id;
+        end if;
+        return new;
+    end;
+$$
+//trigger's function for is_approved;
+
+CREATE TRIGGER is_approved_changes
+    AFTER update
+    on order_entity
+    for each row
+    execute procedure is_approve_function();
+
+  //  trigger for is approved;
+
+create function is_returned_function()
+RETURNS  trigger
+LANGUAGE plpgsql
+as $$
+    BEGIN
+        if new.is_returned <>old.is_returned and new.is_returned=true then
+            update book_entity set quantity=(quantity+1) where id=old.book_id;
+        end if;
+        return new;
+    end;
+$$
+
+   // trigger's function for is_returned;
+
+
+
+    CREATE TRIGGER is_returned_changes
+        AFTER update
+        on order_entity
+        for each row
+        execute procedure is_returned_function();
+
+   //      trigger for is_returned_changes

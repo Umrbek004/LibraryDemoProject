@@ -15,10 +15,10 @@ import java.util.Date;
 @Data
 @ToString
 public class OrderEntity extends BasicEntity {
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id",nullable = false)
     private UserEntity user;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "book_id",nullable = false)
     private BookEntity book;
     @Column

@@ -1,5 +1,7 @@
 package com.example.librarydemoproject.service;
 
+import com.example.librarydemoproject.dto.orderDTOs.BookAndOrderPropertiesDTO;
+import com.example.librarydemoproject.dto.orderDTOs.ResponseGetAllOwnOrdersDTO;
 import com.example.librarydemoproject.entity.BookEntity;
 import com.example.librarydemoproject.entity.OrderEntity;
 import com.example.librarydemoproject.entity.UserEntity;
@@ -11,7 +13,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,6 +45,24 @@ public class OrderManageService {
                 }
             }
         }
-        return "There is no such book id ="+bookId;
+        return "There is no such book id =" + bookId;
+    }
+
+    public ResponseGetAllOwnOrdersDTO getAllOwnOrders() {
+        LinkedList<BookAndOrderPropertiesDTO> orderEntities1 = new LinkedList<>();
+        AppUser principal = (AppUser) (SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        List<OrderEntity> allByUserId = orderManageRepository.findAllByUserId(principal.getId());
+        for (OrderEntity orderEntity : allByUserId) {
+            orderEntities1.add(new BookAndOrderPropertiesDTO(orderEntity.getBook(),
+                    orderEntity.getIsApproved(),
+                    orderEntity.getIsReturned(),
+                    orderEntity.getOrderDate()));
+        }
+        ResponseGetAllOwnOrdersDTO responseGetAllOwnOrdersDTO = new ResponseGetAllOwnOrdersDTO(allByUserId.get(0).getUser().getUsername(),
+                allByUserId.get(0).getUser().getFirstName(),
+                allByUserId.get(0).getUser().getLastName(),
+                orderEntities1);
+
+        return responseGetAllOwnOrdersDTO;
     }
 }
