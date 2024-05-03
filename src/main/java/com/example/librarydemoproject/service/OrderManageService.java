@@ -1,5 +1,6 @@
 package com.example.librarydemoproject.service;
 
+import com.example.librarydemoproject.dto.orderDTOs.AllApproveRequests;
 import com.example.librarydemoproject.dto.orderDTOs.BookAndOrderPropertiesDTO;
 import com.example.librarydemoproject.dto.orderDTOs.ResponseGetAllOwnOrdersDTO;
 import com.example.librarydemoproject.entity.BookEntity;
@@ -64,5 +65,15 @@ public class OrderManageService {
                 orderEntities1);
 
         return responseGetAllOwnOrdersDTO;
+    }
+
+    public List<AllApproveRequests> getAllApproveRequests() {
+        LinkedList<AllApproveRequests> allApproveRequests = new LinkedList<>();
+        for (OrderEntity orderEntity : orderManageRepository.findAllByIsApprovedFalse()) {
+            allApproveRequests.add(new AllApproveRequests(orderEntity.getId(),orderEntity.getIsApproved(),orderEntity.getIsReturned()
+                        ,orderEntity.getOrderDate(),orderEntity.getBook().getId(),orderEntity.getUser().getId()));
+        }
+
+        return allApproveRequests;
     }
 }

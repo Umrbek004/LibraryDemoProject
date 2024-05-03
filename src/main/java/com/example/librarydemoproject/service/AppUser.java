@@ -16,6 +16,9 @@ import java.util.List;
 @Data
 public class AppUser implements UserDetails {
     private Integer id;
+    private String username;
+    private String password;
+    private String role;
 
     public Integer getId() {
         return id;
@@ -24,10 +27,6 @@ public class AppUser implements UserDetails {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    private String username;
-    private String password;
-    private String role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

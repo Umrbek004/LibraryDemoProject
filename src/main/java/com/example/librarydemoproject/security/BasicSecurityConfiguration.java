@@ -8,6 +8,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @EnableWebSecurity
 @Configuration
 @RequiredArgsConstructor
+@EnableMethodSecurity
 public class BasicSecurityConfiguration {
     private final UserDetailsServiceImpl userDetailsService;
 
@@ -55,8 +57,11 @@ public class BasicSecurityConfiguration {
 //                .and().authorizeRequests().antMatchers(HttpMethod.GET,"/api/**").hasAuthority("read")
 ////                .antMatchers(HttpMethod.GET,"/api/product").permitAll()
 //                .anyRequest().authenticated().and();
+
         http.csrf().disable().httpBasic().and().authenticationProvider(daoAuth())
-                .authorizeRequests().anyRequest().authenticated();
+                .authorizeRequests()
+                .anyRequest().authenticated();
+
         return http.build();
     }
 

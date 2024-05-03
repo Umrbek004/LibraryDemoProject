@@ -5,6 +5,7 @@ import com.example.librarydemoproject.model.ResponseModel;
 import com.example.librarydemoproject.service.UserManageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -22,11 +23,11 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<?> addUser(@RequestBody UserEntity user) {
-        userManageService.addUser(user);
         return userManageService.addUser(user) ? ResponseEntity.ok(ResponseModel.getSuccess("added")) :
                 ResponseEntity.ok(ResponseModel.getSuccess("not added"));
     }
     @GetMapping("/id")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<?> getUserID(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object principal = authentication.getPrincipal();

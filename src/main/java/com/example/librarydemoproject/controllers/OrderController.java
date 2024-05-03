@@ -22,4 +22,9 @@ public class OrderController {
     public ResponseEntity<?> getAllOwnOrders() {
         return ResponseEntity.ok(ResponseModel.getSuccess(orderManageService.getAllOwnOrders()));
     }
+
+    @GetMapping("approveRequests")
+    public ResponseEntity<?> getAllApproveRequests(){
+        return ResponseEntity.ok(ResponseModel.getSuccess(orderManageService.getAllApproveRequests()));
+    }
 }
